@@ -1,7 +1,7 @@
 // TASK: import helper functions from utils
-import {getTasks, createNewTask, patchTask, putTask, deleteTask} from "utils/taskFunction.js"
+import {getTasks, createNewTask, patchTask, putTask, deleteTask} from "/utils/taskFunctions.js"
 // TASK: import initialData
-import initialData from "initialData.js";
+import {initialData} from "/initialData.js";
 
 /*************************************************************************************************************************************************
  * FIX BUGS!!!
@@ -124,7 +124,7 @@ function styleActiveBoard(boardName) {
 
 
 function addTaskToUI(task) {
-  const column = document.querySelector('.column-div[data-status="${task.status}"]'); 
+  const column = document.querySelector('.column-div[data-status="${task.status}$"]'); 
   if (!column) {
     console.error(`Column not found for status: ${task.status}`);
     return;
