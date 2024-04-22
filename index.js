@@ -190,7 +190,7 @@ function setupEventListeners() {
 // Toggles tasks modal
 // Task: Fix bugs
 function toggleModal(show, modal = elements.modalWindow) {
-  modal.style.display = show ? 'block' : 'none'; 
+  modal.style.display = show ? 'block' : 'none';
 }
 
 /*************************************************************************************************************************************************
@@ -217,12 +217,12 @@ function addTask(event) {
 
 function toggleSidebar(show) {
   const sidebar = document.querySelector(".side-bar")
-  sidebar.style.show = show
-  
+  sidebar.style.display = show ? 'block' : 'none';
+  elements.showSideBarBtn.style.display = show ? 'none' : 'block';
 }
 
 function toggleTheme() {
- 
+  body.classList.toggle("")
 }
 
 
