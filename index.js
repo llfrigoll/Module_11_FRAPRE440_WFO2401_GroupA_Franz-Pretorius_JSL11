@@ -20,7 +20,7 @@ function initializeData() {
 // TASK: Get elements from the DOM
 const elements = {
   headerBoardName = document.querySelector("#header-board-name"),
-  columnDivs = document.querySelector(".column-div"),
+  columnDivs = document.querySelectorAll(".column-div"),
   editTaskModal = document.querySelector(".edit-task-modal-window"),
   filterDiv = document.querySelector("#filterDiv"),
   hideSideBarBtn = document.querySelector("#hide-side-bar-btn"),
@@ -94,7 +94,7 @@ function filterAndDisplayTasksByBoard(boardName) {
       taskElement.setAttribute('data-task-id', task.id);
 
       // Listen for a click event on each task and open a modal
-      taskElement.click() => { 
+      taskElement.addEventListener('click', () => { 
         openEditTaskModal(task);
       });
 
