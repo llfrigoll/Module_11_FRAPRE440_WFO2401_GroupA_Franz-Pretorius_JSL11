@@ -222,7 +222,13 @@ function toggleSidebar(show) {
 }
 
 function toggleTheme() {
-  body.classList.toggle("")
+  const logo = document.getElementById("logo")
+
+  if(document.body.classList.toggle('light-theme') === true) {
+    logo.setAttribute('src', "./assets/logo-light.svg")
+  } else {
+    logo.setAttribute('src', "./assets/logo-dark.svg")
+  }
 }
 
 
