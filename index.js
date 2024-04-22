@@ -19,17 +19,16 @@ function initializeData() {
 
 // TASK: Get elements from the DOM
 const elements = {
-  headerBoardName : document.querySelector("#header-board-name"),
-  columnDivs : document.querySelectorAll(".column-div"),
-  editTaskModal : document.querySelector(".edit-task-modal-window"),
-  filterDiv : document.querySelector("#filterDiv"),
-  hideSideBarBtn : document.querySelector("#hide-side-bar-btn"),
-  showSideBarBtn : document.querySelector("#show-side-bar-btn"),
-  themeSwitch : document.querySelector("#switch"),
-  createNewTaskBtn : document.querySelector("#create-task-btn"),
-  modalWindow : document.querySelector(".modal-window")
-}
-
+  headerBoardName: document.querySelector("#header-board-name"),
+  columnDivs: document.querySelectorAll(".column-div"),
+  editTaskModal: document.querySelector(".edit-task-modal-window"),
+  filterDiv: document.querySelector("#filterDiv"),
+  hideSideBarBtn: document.querySelector("#hide-side-bar-btn"),
+  showSideBarBtn: document.querySelector("#show-side-bar-btn"),
+  themeSwitch: document.querySelector("#switch"),
+  createNewTaskBtn: document.querySelector("#add-new-task-btn"),
+  modalWindow: document.querySelector(".modal-window")
+};
 let activeBoard = ""
 
 // Extracts unique board names from tasks
@@ -44,6 +43,7 @@ function fetchAndDisplayBoardsAndTasks() {
     elements.headerBoardName.textContent = activeBoard
     styleActiveBoard(activeBoard)
     refreshTasksUI();
+
   }
 }
 
@@ -85,6 +85,7 @@ function filterAndDisplayTasksByBoard(boardName) {
                         </div>`;
 
     const tasksContainer = document.createElement("div");
+    tasksContainer.setAttribute("class", "tasks-container")
     column.appendChild(tasksContainer);
 
     filteredTasks.filter(task => task.status === status).forEach(task => { 
@@ -124,13 +125,14 @@ function styleActiveBoard(boardName) {
 
 
 function addTaskToUI(task) {
-  const column = document.querySelector('.column-div[data-status="${task.status}$"]'); 
+  const column = document.querySelector(`.column-div[data-status="${task.status}"]`); 
   if (!column) {
     console.error(`Column not found for status: ${task.status}`);
     return;
   }
 
   let tasksContainer = column.querySelector('.tasks-container');
+
   if (!tasksContainer) {
     console.warn(`Tasks container not found for status: ${task.status}, creating one.`);
     tasksContainer = document.createElement('div');
@@ -139,11 +141,13 @@ function addTaskToUI(task) {
   }
 
   const taskElement = document.createElement('div');
-  taskElement.className = 'task-div';
+  taskElement.classList.add('task-div');
   taskElement.textContent = task.title; // Modify as needed
   taskElement.setAttribute('data-task-id', task.id);
+
   
-  tasksContainer.appendChild(); 
+  tasksContainer.appendChild(taskElement);
+  refreshTasksUI();
 }
 
 
@@ -198,12 +202,16 @@ function toggleModal(show, modal = elements.modalWindow) {
  * **********************************************************************************************************************************************/
 
 function addTask(event) {
-  event.preventDefault(); 
+  event.preventDefault();
 
   //Assign user input to the task object
     const task = {
-      
+      "title": document.getElementById("title-input").value,
+      "description" : document.getElementById("desc-input").value,
+      "status" : document.getElementById("select-status").value,
+      "board" : activeBoard
     };
+    
     const newTask = createNewTask(task);
     if (newTask) {
       addTaskToUI(newTask);
