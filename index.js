@@ -19,15 +19,15 @@ function initializeData() {
 
 // TASK: Get elements from the DOM
 const elements = {
-  headerBoardName = document.querySelector("#header-board-name"),
-  columnDivs = document.querySelectorAll(".column-div"),
-  editTaskModal = document.querySelector(".edit-task-modal-window"),
-  filterDiv = document.querySelector("#filterDiv"),
-  hideSideBarBtn = document.querySelector("#hide-side-bar-btn"),
-  showSideBarBtn = document.querySelector("#show-side-bar-btn"),
-  themeSwitch = document.querySelector("#switch"),
-  createNewTaskBtn = document.querySelector("#create-task-btn"),
-  modalWindow = document.querySelector(".modal-window")
+  headerBoardName : document.querySelector("#header-board-name"),
+  columnDivs : document.querySelectorAll(".column-div"),
+  editTaskModal : document.querySelector(".edit-task-modal-window"),
+  filterDiv : document.querySelector("#filterDiv"),
+  hideSideBarBtn : document.querySelector("#hide-side-bar-btn"),
+  showSideBarBtn : document.querySelector("#show-side-bar-btn"),
+  themeSwitch : document.querySelector("#switch"),
+  createNewTaskBtn : document.querySelector("#create-task-btn"),
+  modalWindow : document.querySelector(".modal-window")
 }
 
 let activeBoard = ""
@@ -151,7 +151,9 @@ function addTaskToUI(task) {
 function setupEventListeners() {
   // Cancel editing task event listener
   const cancelEditBtn = document.getElementById('cancel-edit-btn');
-  cancelEditBtn.click() => toggleModal(false, elements.editTaskModal));
+  cancelEditBtn.addEventListener('click', () => {
+    toggleModal(false, elements.editTaskModal)
+  });
 
   // Cancel adding new task event listener
   const cancelAddTaskBtn = document.getElementById('cancel-add-task-btn');
@@ -167,8 +169,8 @@ function setupEventListeners() {
   });
 
   // Show sidebar event listener
-  elements.hideSideBarBtn.click() => toggleSidebar(false));
-  elements.showSideBarBtn.click() => toggleSidebar(true));
+  elements.hideSideBarBtn.addEventListener('click', () => toggleSidebar(false));
+  elements.showSideBarBtn.addEventListener('click', () => toggleSidebar(true));
 
   // Theme switch event listener
   elements.themeSwitch.addEventListener('change', toggleTheme);
@@ -188,7 +190,7 @@ function setupEventListeners() {
 // Toggles tasks modal
 // Task: Fix bugs
 function toggleModal(show, modal = elements.modalWindow) {
-  modal.style.display = show ? 'block' => 'none'; 
+  modal.style.display = show ? 'block' : 'none'; 
 }
 
 /*************************************************************************************************************************************************
